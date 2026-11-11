@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>குடும்ப உறுப்பினர் படிவம் | Family Member Form</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;700&family=Noto+Serif+Tamil:wght@700&display=swap">
+<style>
+:root{--ink:#17233a;--muted:#5c6b82;--paper:#f3f6fa;--card:#fff;--line:#cfd8e5;--brand:#1c3d6e;--gold:#b8892b;--err:#b3261e}
+@media(prefers-color-scheme:dark){:root{--ink:#e6ecf5;--muted:#9fb0c8;--paper:#0f1726;--card:#17223a;--line:#2c3b58;--brand:#8db3ea;--gold:#e0b45a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 "Noto Sans Tamil",system-ui,sans-serif;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+header{background:var(--brand);color:#fff;padding:28px 16px;text-align:center;border-bottom:5px solid var(--gold)}
+@media(prefers-color-scheme:dark){header{background:#1c3d6e}}
+header p{margin:0;font-size:15px;opacity:.9}
+h1{font:700 30px/1.3 "Noto Serif Tamil",serif;margin:6px 0 0}
+h1 small{display:block;font:400 15px "Noto Sans Tamil",sans-serif;opacity:.85}
+nav{display:flex;justify-content:center;gap:8px;padding:12px}
+nav button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 18px;border-radius:20px;cursor:pointer;font:inherit}
+nav button.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+@media(prefers-color-scheme:dark){nav button.on{color:#0f1726}}
+main{max-width:860px;margin:0 auto;padding:0 14px 40px}
+fieldset{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:6px;margin:16px 0;padding:6px 18px 18px}
+legend{font-weight:700;color:var(--brand);padding:0 8px;font-size:18px}
+legend small,label small,th small{font-weight:400;color:var(--muted);display:block;font-size:12.5px}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px 16px;margin-top:10px}
+.w{grid-column:1/-1}
+label{font-weight:600;font-size:14.5px;line-height:1.3}
+input,select,textarea{width:100%;margin-top:4px;padding:9px 10px;border:1px solid var(--line);border-radius:5px;background:var(--paper);color:var(--ink);font:inherit}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+input[readonly]{opacity:.75}
+.chk{display:flex;gap:10px;align-items:center;font-weight:600;margin-top:12px;cursor:pointer}
+.chk input{width:20px;height:20px;margin:0}
+.child{border:1px dashed var(--line);border-radius:6px;padding:4px 14px 14px;margin-top:14px}
+.child h3{margin:10px 0 0;font-size:16px;color:var(--brand);display:flex;justify-content:space-between;align-items:center}
+.btn{border:0;border-radius:5px;padding:10px 22px;font:600 16px "Noto Sans Tamil",sans-serif;cursor:pointer;background:var(--brand);color:#fff;margin-top:14px}
+@media(prefers-color-scheme:dark){.btn{color:#0f1726}}
+.btn.alt{background:transparent;color:var(--brand);border:1px solid var(--brand)}
+.btn.x{padding:3px 12px;margin:0;font-size:13px;color:var(--err);border-color:var(--err)}
+.msg{padding:12px 16px;border-radius:6px;margin:14px 0;font-weight:600}
+.ok{background:#dff3e4;color:#14532d}.bad{background:#fbe3e1;color:var(--err)}
+.hide{display:none}
+.tw{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:6px;margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+th{background:var(--paper);position:sticky;top:0}
+h2{color:var(--brand);font-size:19px;margin:22px 0 0}
+</style>
+</head>
+<body>
+<header>
+  <p>CSI மோனகன் திருச்சபை, கசவநல்லாதூர், கடம்பத்தூர் குருசேகரம்</p>
+  <p>CSI Monaghan Church, Kasavanallathur, Kadambathur Pastorate</p>
+  <h1>குடும்ப உறுப்பினர் படிவம்<small>Family Member Form</small></h1>
+</header>
+<nav>
+  <button id="tForm" class="on">படிவம் / Form</button>
+  <button id="tAdmin">நிர்வாகி / Admin</button>
+</nav>
+<main>
+
+<!-- ============ FORM ============ -->
+<section id="formView">
+<form id="f" novalidate>
+<fieldset><legend>குடும்ப தலைவர் <small>Head of the Family</small></legend>
+<div class="g">
+  <label>குடும்ப தலைவர் பெயர் *<small>Head of family name</small><input name="HeadName" required></label>
+  <label>தந்தை / கணவர் பெயர் *<small>Father / Husband name</small><input name="FatherHusbandName" required></label>
+  <label>பிறந்த தேதி *<small>Date of birth</small><input type="date" name="DOB" data-age="Age" required></label>
+  <label>வயது<small>Age (auto)</small><input name="Age" readonly></label>
+  <label>ஞானஸ்நான தேதி<small>Date of baptism</small><input type="date" name="BaptismDate"></label>
+  <label>திருமண தேதி (இருந்தால்)<small>Marriage date (if available)</small><input type="date" name="MarriageDate"></label>
+  <label>கல்வித் தகுதி<small>Qualification</small><input name="Qualification"></label>
+  <label>தொழில்<small>Occupation</small><input name="Occupation"></label>
+  <label>கைபேசி எண் *<small>Mobile number</small><input type="tel" name="Mobile" inputmode="numeric" maxlength="10" pattern="[0-9]{10}" required></label>
+  <label>மின்னஞ்சல்<small>Email</small><input type="email" name="Email"></label>
+  <label>இரத்த வகை<small>Blood group</small>
+    <select name="BloodGroup"><option value="">-</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></label>
+  <label>பகுதி / ஊர்<small>Area / Village</small><input name="Area"></label>
+  <label class="w">முகவரி *<small>Address</small><textarea name="Address" rows="2" required></textarea></label>
+  <label>அஞ்சல் குறியீட்டு எண்<small>Pincode</small><input name="Pincode" inputmode="numeric" maxlength="6"></label>
+</div></fieldset>
+
+<fieldset><legend>மனைவி <small>Wife</small></legend>
+<label class="chk"><input type="checkbox" id="hasWife">மனைவி விவரங்களை பதிவிடு / Add wife details</label>
+<div class="g hide" id="wifeBox">
+  <label>மனைவி பெயர்<small>Wife name</small><input name="WifeName"></label>
+  <label>பிறந்த தேதி<small>Date of birth</small><input type="date" name="WifeDOB" data-age="WifeAge"></label>
+  <label>வயது<small>Age (auto)</small><input name="WifeAge" readonly></label>
+  <label>ஞானஸ்நான தேதி<small>Date of baptism</small><input type="date" name="WifeBaptism"></label>
+  <label>கல்வித் தகுதி<small>Qualification</small><input name="WifeQualification"></label>
+  <label>தொழில்<small>Occupation</small><input name="WifeOccupation"></label>
+  <label>கைபேசி எண்<small>Mobile number</small><input type="tel" name="WifeMobile" inputmode="numeric" maxlength="10"></label>
+</div></fieldset>
+
+<fieldset><legend>பிள்ளைகள் <small>Children</small></legend>
+<label class="chk"><input type="checkbox" id="hasKids">பிள்ளைகள் உள்ளனர் / Has children</label>
+<div id="kidsBox" class="hide">
+  <p>பிள்ளைகளின் எண்ணிக்கை / Number of children: <b id="kidCount">0</b></p>
+  <div id="kids"></div>
+  <button type="button" class="btn alt" id="addKid">+ பிள்ளையை சேர் / Add child</button>
+</div></fieldset>
+
+<fieldset><legend>மற்றவை <small>Other</small></legend>
+<label>குறிப்புகள்<small>Remarks</small><textarea name="Remarks" rows="2"></textarea></label>
+</fieldset>
+
+<div id="status"></div>
+<button class="btn" id="submitBtn" type="submit">சமர்ப்பி / Submit</button>
+</form>
+</section>
+
+<template id="kidT">
+<div class="child">
+  <h3><span>பிள்ளை <b class="n"></b> / Child</span><button type="button" class="btn alt x">நீக்கு / Remove</button></h3>
+  <div class="g">
+    <label>பெயர் *<small>Name</small><input data-k="ChildName"></label>
+    <label>பாலினம்<small>Gender</small><select data-k="Gender"><option value="">-</option><option value="Male">ஆண் / Male</option><option value="Female">பெண் / Female</option><option value="Other">மற்றவை / Other</option></select></label>
+    <label>பிறந்த தேதி<small>Date of birth</small><input type="date" data-k="DOB"></label>
+    <label>வயது<small>Age (auto)</small><input data-k="Age" readonly></label>
+    <label>ஞானஸ்நான தேதி<small>Date of baptism</small><input type="date" data-k="BaptismDate"></label>
+    <label>கல்வித் தகுதி<small>Qualification</small><input data-k="Qualification"></label>
+    <label>கைபேசி எண்<small>Mobile number</small><input type="tel" inputmode="numeric" maxlength="10" data-k="Mobile"></label>
+    <label class="w">முகவரி<small>Address (blank = same as family)</small><input data-k="Address"></label>
+  </div>
+</div>
+</template>
+
+<!-- ============ ADMIN ============ -->
+<section id="adminView" class="hide">
+  <fieldset><legend>நிர்வாகி பார்வை <small>Admin view</small></legend>
+  <div class="g">
+    <label>கடவுச்சொல்<small>Admin password</small><input type="password" id="key"></label>
+    <label>தேடு<small>Search</small><input id="q" placeholder="பெயர் / mobile / area"></label>
+  </div>
+  <button class="btn" id="load" type="button">ஏற்று / Load entries</button>
+  <button class="btn alt hide" id="csv" type="button">CSV பதிவிறக்கம் / Download CSV</button>
+  <div id="aStatus"></div></fieldset>
+  <h2 id="h1" class="hide">குடும்பங்கள் / Families (<span id="nF">0</span>)</h2>
+  <div class="tw hide" id="tF"></div>
+  <h2 id="h2" class="hide">பிள்ளைகள் / Children (<span id="nC">0</span>)</h2>
+  <div class="tw hide" id="tC"></div>
+</section>
+</main>
+
+<script>
+// 1) Paste your deployed Google Apps Script Web App URL here:
+const SCRIPT_URL = 'PASTE_YOUR_WEB_APP_URL_HERE';
+
+const $ = s => document.querySelector(s), f = $('#f');
+const age = v => { if(!v) return ''; const d=new Date(v), n=new Date(); let a=n.getFullYear()-d.getFullYear();
+  if(n.getMonth()<d.getMonth()||(n.getMonth()==d.getMonth()&&n.getDate()<d.getDate())) a--; return a>=0?a:''; };
+
+// tabs
+function show(a){ $('#formView').classList.toggle('hide',a); $('#adminView').classList.toggle('hide',!a);
+  $('#tForm').classList.toggle('on',!a); $('#tAdmin').classList.toggle('on',a); }
+$('#tForm').onclick=()=>show(false); $('#tAdmin').onclick=()=>show(true);
+
+// auto age
+document.addEventListener('change',e=>{
+  const t=e.target;
+  if(t.dataset.age) f.elements[t.dataset.age].value=age(t.value);
+  if(t.dataset.k==='DOB') t.closest('.child').querySelector('[data-k=Age]').value=age(t.value);
+});
+$('#hasWife').onchange=e=>$('#wifeBox').classList.toggle('hide',!e.target.checked);
+$('#hasKids').onchange=e=>{ $('#kidsBox').classList.toggle('hide',!e.target.checked); if(e.target.checked&&!$('#kids').children.length) addKid(); };
+
+// children rows
+function renum(){ [...$('#kids').children].forEach((c,i)=>c.querySelector('.n').textContent=i+1); $('#kidCount').textContent=$('#kids').children.length; }
+function addKid(){ const n=$('#kidT').content.cloneNode(true); n.querySelector('.x').onclick=e=>{e.target.closest('.child').remove();renum();};
+  $('#kids').appendChild(n); renum(); }
+$('#addKid').onclick=addKid;
+
+const msg=(el,t,c)=>{ el.innerHTML=`<div class="msg ${c}">${t}</div>`; };
+
+// submit
+f.onsubmit=async e=>{
+  e.preventDefault();
+  if(!f.checkValidity()){ f.reportValidity(); return; }
+  if(SCRIPT_URL.startsWith('PASTE')){ msg($('#status'),'SCRIPT_URL அமைக்கப்படவில்லை / Set SCRIPT_URL in the file first','bad'); return; }
+  const fam=Object.fromEntries(new FormData(f).entries());
+  if(!$('#hasWife').checked) ['WifeName','WifeDOB','WifeAge','WifeBaptism','WifeQualification','WifeOccupation','WifeMobile'].forEach(k=>fam[k]='');
+  const kids=$('#hasKids').checked?[...$('#kids').children].map(c=>{ const o={}; c.querySelectorAll('[data-k]').forEach(i=>o[i.dataset.k]=i.value);
+    if(!o.Address) o.Address=fam.Address; return o; }).filter(o=>o.ChildName):[];
+  const b=$('#submitBtn'); b.disabled=true; msg($('#status'),'சேமிக்கிறது... / Saving...','ok');
+  try{
+    await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify({family:fam,children:kids})});
+    msg($('#status'),'நன்றி! உங்கள் விவரங்கள் சேமிக்கப்பட்டன. / Thank you! Your details have been saved.','ok');
+    f.reset(); $('#kids').innerHTML=''; $('#wifeBox').classList.add('hide'); $('#kidsBox').classList.add('hide'); renum();
+    scrollTo({top:0,behavior:'smooth'});
+  }catch(err){ msg($('#status'),'சேமிக்க முடியவில்லை, மீண்டும் முயற்சிக்கவும். / Could not save, please try again.','bad'); }
+  b.disabled=false;
+};
+
+// admin
+let DATA=null;
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function table(rows){ if(!rows.length) return '<p style="padding:12px">பதிவுகள் இல்லை / No entries</p>';
+  const h=Object.keys(rows[0]); return '<table><tr>'+h.map(x=>`<th>${x}</th>`).join('')+'</tr>'+rows.map(r=>'<tr>'+h.map(x=>`<td>${esc(r[x])}</td>`).join('')+'</tr>').join('')+'</table>'; }
+function render(){ const q=$('#q').value.toLowerCase(), m=r=>!q||Object.values(r).join(' ').toLowerCase().includes(q);
+  const F=DATA.families.filter(m), C=DATA.children.filter(m);
+  $('#tF').innerHTML=table(F); $('#tC').innerHTML=table(C); $('#nF').textContent=F.length; $('#nC').textContent=C.length;
+  ['#h1','#h2','#tF','#tC','#csv'].forEach(s=>$(s).classList.remove('hide')); }
+$('#q').oninput=()=>DATA&&render();
+$('#load').onclick=async()=>{
+  if(SCRIPT_URL.startsWith('PASTE')){ msg($('#aStatus'),'SCRIPT_URL அமைக்கப்படவில்லை / Set SCRIPT_URL first','bad'); return; }
+  msg($('#aStatus'),'ஏற்றுகிறது... / Loading...','ok');
+  try{ const r=await (await fetch(SCRIPT_URL+'?key='+encodeURIComponent($('#key').value))).json();
+    if(!r.ok){ msg($('#aStatus'),'கடவுச்சொல் தவறு / Wrong password','bad'); return; }
+    DATA=r; $('#aStatus').innerHTML=''; render();
+  }catch(err){ msg($('#aStatus'),'ஏற்ற முடியவில்லை / Could not load','bad'); } };
+$('#csv').onclick=()=>{ const rows=DATA.families, h=Object.keys(rows[0]||{});
+  const c=[h.join(',')].concat(rows.map(r=>h.map(k=>'"'+String(r[k]??'').replace(/"/g,'""')+'"').join(','))).join('\n');
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob(['\ufeff'+c],{type:'text/csv'})); a.download='families.csv'; a.click(); };
+</script>
+</body>
+</html>
